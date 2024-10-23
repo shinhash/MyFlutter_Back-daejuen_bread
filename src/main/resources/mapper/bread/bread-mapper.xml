@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.hash.hashBackEnd.bread.mapper.BreadMapper">
+
+	<select id="selectBreadRegionList" resultType="HashMap">
+		/* query id = selectBreadRegionList */
+		SELECT   REGION_CD
+			   , REGION_NM
+			   , USE_YN
+		  FROM BREAD_REGION
+		 WHERE USE_YN = 'Y'
+	</select>
+	
+	<select id="selectBreadAreaList" parameterType="HashMap" resultType="HashMap">
+		/* query id = selectBreadAreaList */
+		SELECT   AREA_CD
+			   , REGION_CD
+			   , AREA_NM
+			   , USE_YN
+		  FROM BREAD_AREA
+		 WHERE USE_YN = 'Y'
+		 <if test="regionCd != ''">
+		   AND REGION_CD = #{regionCd}
+		 </if>
+	</select>
+
+	<select id="selectBreadStoreList" parameterType="HashMap" resultType="HashMap">
+		/* query id = selectBreadStoreList */
+		SELECT   BREAD_STORE.STORE_ID AS STORE_ID
+			   , BREAD_STORE.AREA_CD AS AREA_CD
+			   , BREAD_STORE.COMPONY_NM AS COMPONY_NM
+			   , BREAD_STORE.ADDRESS AS ADDRESS
+			   , BREAD_STORE.LAT AS LAT
+			   , BREAD_STORE.LNG AS LNG
+			   , BREAD_STORE.CLOSE_YN AS CLOSE_YN
+		  FROM BREAD_STORE
+		  JOIN BREAD_AREA
+		    ON BREAD_STORE.CLOSE_YN = 'Y'
+		 <if test="regionCd != ''">
+		   AND BREAD_AREA.REGION_CD = #{regionCd}
+		 </if>
+		 <if test="areaCd != ''">
+		   AND BREAD_AREA.AREA_CD = #{areaCd}
+		 </if>
+	</select>
+
+</mapper>
