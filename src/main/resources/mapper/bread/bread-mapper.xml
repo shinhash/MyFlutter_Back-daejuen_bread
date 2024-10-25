@@ -2,45 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.hash.hashBackEnd.bread.mapper.BreadMapper">
 
-	<select id="selectBreadRegionList" resultType="HashMap">
+	<select id="selectBreadRegionList" parameterType="hashMap" resultType="hashMap">
 		/* query id = selectBreadRegionList */
 		SELECT   REGION_CD
 			   , REGION_NM
 			   , USE_YN
 		  FROM BREAD_REGION
 		 WHERE USE_YN = 'Y'
+		 <if test="regionCd != null and regionCd != ''">
+		   AND REGION_CD = #{regionCd}
+		 </if>
+		ORDER BY REGION_NM
 	</select>
 	
-	<select id="selectBreadAreaList" parameterType="HashMap" resultType="HashMap">
+	<select id="selectBreadAreaList" parameterType="hashMap" resultType="hashMap">
 		/* query id = selectBreadAreaList */
 		SELECT   AREA_CD
 			   , REGION_CD
 			   , AREA_NM
+			   , AREA_LAT
+			   , AREA_LNG
 			   , USE_YN
 		  FROM BREAD_AREA
 		 WHERE USE_YN = 'Y'
-		 <if test="regionCd != ''">
-		   AND REGION_CD = #{regionCd}
+		 <if test="regionCd != null and regionCd != ''">
+		   AND REGION_CD = '${regionCd}'
 		 </if>
+		 <if test="areaCd != null and areaCd != ''">
+		   AND AREA_CD = '${areaCd}'
+		 </if>
+		ORDER BY AREA_NM
 	</select>
 
-	<select id="selectBreadStoreList" parameterType="HashMap" resultType="HashMap">
+	<select id="selectBreadStoreList" parameterType="hashMap" resultType="hashMap">
 		/* query id = selectBreadStoreList */
 		SELECT   BREAD_STORE.STORE_ID AS STORE_ID
 			   , BREAD_STORE.AREA_CD AS AREA_CD
-			   , BREAD_STORE.COMPONY_NM AS COMPONY_NM
-			   , BREAD_STORE.ADDRESS AS ADDRESS
-			   , BREAD_STORE.LAT AS LAT
-			   , BREAD_STORE.LNG AS LNG
-			   , BREAD_STORE.CLOSE_YN AS CLOSE_YN
+			   , BREAD_STORE.STORE_NM AS STORE_NM
+			   , BREAD_STORE.STORE_ADDR AS STORE_ADDR
+			   , BREAD_STORE.STORE_LAT AS STORE_LAT
+			   , BREAD_STORE.STORE_LNG AS STORE_LNG
+			   , BREAD_STORE.USE_YN AS USE_YN
 		  FROM BREAD_STORE
 		  JOIN BREAD_AREA
-		    ON BREAD_STORE.CLOSE_YN = 'Y'
-		 <if test="regionCd != ''">
+		    ON BREAD_STORE.AREA_CD = BREAD_AREA.AREA_CD
+		 WHERE 1 = 1
+		   AND BREAD_STORE.USE_YN = 'Y'
+		 <if test="regionCd != null and regionCd != ''">
 		   AND BREAD_AREA.REGION_CD = #{regionCd}
 		 </if>
-		 <if test="areaCd != ''">
+		 <if test="areaCd != null and areaCd != ''">
 		   AND BREAD_AREA.AREA_CD = #{areaCd}
+		 </if>
+		 <if test="storeId != null and storeId != ''">
+		   AND BREAD_STORE.STORE_ID = #{storeId}
 		 </if>
 	</select>
 

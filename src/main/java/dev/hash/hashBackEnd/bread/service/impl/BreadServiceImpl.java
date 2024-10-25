@@ -1,5 +1,6 @@
 package dev.hash.hashBackEnd.bread.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,18 +18,22 @@ public class BreadServiceImpl implements BreadService {
 	private BreadMapper breadMapper;
 	
 	@Override
-	public List<Map<String, Object>> selectBreadRegionList() throws Exception {		
-		return breadMapper.selectBreadRegionList();
+	public List<Map<String, Object>> selectBreadRegionList(Map<String, Object> dataInfo) throws Exception {
+		return breadMapper.selectBreadRegionList(dataInfo);
 	}
 	
 	@Override
-	public List<Map<String, Object>> selectBreadAreaList(String regionCd) throws Exception {		
-		return breadMapper.selectBreadAreaList(regionCd);
+	public List<Map<String, Object>> selectBreadAreaList(Map<String, Object> dataInfo) throws Exception {
+		return breadMapper.selectBreadAreaList(dataInfo);
 	}
 
 	@Override
-	public List<Map<String, Object>> selectBreadStoreList(String areaCd) throws Exception {		
-		return breadMapper.selectBreadStoreList(areaCd);
+	public List<Map<String, Object>> selectBreadStoreList(Map<String, Object> dataInfo) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("regionCd", "CJ_C001");
+		map.put("areaCd", "CA001");
+		System.out.println(map);
+		return breadMapper.selectBreadStoreList(map);
 	}
 
 }

@@ -5,10 +5,10 @@ import java.util.Map;
 
 public interface BreadService {
 	
-	List<Map<String, Object>> selectBreadRegionList() throws Exception;
+	List<Map<String, Object>> selectBreadRegionList(Map<String, Object> dataInfo) throws Exception;
 	
-	List<Map<String, Object>> selectBreadAreaList(String regionCd) throws Exception;
+	List<Map<String, Object>> selectBreadAreaList(Map<String, Object> dataInfo) throws Exception;
 	
-	List<Map<String, Object>> selectBreadStoreList(String areaCd) throws Exception;
+	List<Map<String, Object>> selectBreadStoreList(Map<String, Object> dataInfo) throws Exception;
 
 }

@@ -20,10 +20,13 @@ public class BreadController {
 	private BreadService breadService;
 	
 	@PostMapping("/bread/region/list")
-	public List<Map<String, Object>> selectBreadRegionList(@RequestBody HashMap<String, Object> receiveJson) throws Exception {
+	public List<Map<String, Object>> selectBreadRegionList(@RequestBody Map<String, Object> receiveJson) throws Exception {
 		List<Map<String, Object>> returnJson = null;
+		Map<String, Object> dataInfo = new HashMap<>();
 		try {
-			returnJson = breadService.selectBreadRegionList();
+			dataInfo.putAll(receiveJson);
+			log.info("dataInfo put all : " + dataInfo.toString());
+			returnJson = breadService.selectBreadRegionList(dataInfo);
 		}catch (Exception e) { e.printStackTrace(); }
 
 		log.info("================= spring boot selectBreadRegionList success !!! =================");
@@ -31,11 +34,13 @@ public class BreadController {
 	}
 	
 	@PostMapping("/bread/area/list")
-	public List<Map<String, Object>> selectBreadAreaList(@RequestBody HashMap<String, Object> receiveJson) throws Exception {
+	public List<Map<String, Object>> selectBreadAreaList(@RequestBody Map<String, Object> receiveJson) throws Exception {
 		List<Map<String, Object>> returnJson = null;
+		Map<String, Object> dataInfo = new HashMap<>();
 		try {
-			String regionCd = receiveJson.get("regionCd").toString();
-			returnJson = breadService.selectBreadAreaList(regionCd);
+			dataInfo.putAll(receiveJson);
+			log.info("dataInfo put all : " + dataInfo.toString());
+			returnJson = breadService.selectBreadAreaList(dataInfo);
 		}catch (Exception e) { e.printStackTrace(); }
 		
 		log.info("================= spring boot selectBreadAreaList success !!! =================");
@@ -43,13 +48,17 @@ public class BreadController {
 	}
 
 	@PostMapping("/bread/store/list")
-	public List<Map<String, Object>> selectBreadStoreList(@RequestBody HashMap<String, Object> receiveJson) throws Exception {
+	public List<Map<String, Object>> selectBreadStoreList(@RequestBody Map<String, Object> receiveJson) throws Exception {
 		List<Map<String, Object>> returnJson = null;
+		Map<String, Object> dataInfo = new HashMap<>();
 		try {
-			String areaCd = receiveJson.get("areaCd").toString();
-			returnJson = breadService.selectBreadStoreList(areaCd);
+			dataInfo.putAll(receiveJson);
+			log.info("dataInfo put all : " + dataInfo.toString());
+			log.info(dataInfo.get("regionCd").toString());
+			returnJson = breadService.selectBreadStoreList(dataInfo);
 		}catch (Exception e) { e.printStackTrace(); }
 		
+		log.info("returnJson : " + returnJson.toString());
 		log.info("================= spring boot selectBreadStoreList success !!! =================");
 		return returnJson;
 	}
