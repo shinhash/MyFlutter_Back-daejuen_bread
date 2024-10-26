@@ -1,20 +1,19 @@
 package dev.hash.hashBackEnd.bread.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.hash.hashBackEnd.bread.mapper.BreadMapper;
 import dev.hash.hashBackEnd.bread.service.BreadService;
-import jakarta.annotation.Resource;
 
 
 @Service(value="breadService")
 public class BreadServiceImpl implements BreadService {
 	
-	@Resource(name="breadMapper")
+	@Autowired
 	private BreadMapper breadMapper;
 	
 	@Override
@@ -29,11 +28,7 @@ public class BreadServiceImpl implements BreadService {
 
 	@Override
 	public List<Map<String, Object>> selectBreadStoreList(Map<String, Object> dataInfo) throws Exception {
-		Map<String, Object> map = new HashMap<>();
-		map.put("regionCd", "CJ_C001");
-		map.put("areaCd", "CA001");
-		System.out.println(map);
-		return breadMapper.selectBreadStoreList(map);
+		return breadMapper.selectBreadStoreList(dataInfo);
 	}
 
 }

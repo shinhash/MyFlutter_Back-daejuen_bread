@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="dev.hash.hashBackEnd.bread.mapper.BreadMapper">
 
-	<select id="selectBreadRegionList" parameterType="hashMap" resultType="hashMap">
+	<select id="selectBreadRegionList" parameterType="HashMap" resultType="HashMap">
 		/* query id = selectBreadRegionList */
 		SELECT   REGION_CD
 			   , REGION_NM
@@ -15,7 +15,7 @@
 		ORDER BY REGION_NM
 	</select>
 	
-	<select id="selectBreadAreaList" parameterType="hashMap" resultType="hashMap">
+	<select id="selectBreadAreaList" parameterType="HashMap" resultType="HashMap">
 		/* query id = selectBreadAreaList */
 		SELECT   AREA_CD
 			   , REGION_CD
@@ -26,15 +26,15 @@
 		  FROM BREAD_AREA
 		 WHERE USE_YN = 'Y'
 		 <if test="regionCd != null and regionCd != ''">
-		   AND REGION_CD = '${regionCd}'
+		   AND REGION_CD = #{regionCd}
 		 </if>
 		 <if test="areaCd != null and areaCd != ''">
-		   AND AREA_CD = '${areaCd}'
+		   AND AREA_CD = #{areaCd}
 		 </if>
 		ORDER BY AREA_NM
 	</select>
 
-	<select id="selectBreadStoreList" parameterType="hashMap" resultType="hashMap">
+	<select id="selectBreadStoreList" parameterType="HashMap" resultType="HashMap">
 		/* query id = selectBreadStoreList */
 		SELECT   BREAD_STORE.STORE_ID AS STORE_ID
 			   , BREAD_STORE.AREA_CD AS AREA_CD

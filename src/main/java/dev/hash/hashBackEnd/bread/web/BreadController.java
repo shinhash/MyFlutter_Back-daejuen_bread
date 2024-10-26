@@ -54,11 +54,9 @@ public class BreadController {
 		try {
 			dataInfo.putAll(receiveJson);
 			log.info("dataInfo put all : " + dataInfo.toString());
-			log.info(dataInfo.get("regionCd").toString());
 			returnJson = breadService.selectBreadStoreList(dataInfo);
 		}catch (Exception e) { e.printStackTrace(); }
 		
-		log.info("returnJson : " + returnJson.toString());
 		log.info("================= spring boot selectBreadStoreList success !!! =================");
 		return returnJson;
 	}
