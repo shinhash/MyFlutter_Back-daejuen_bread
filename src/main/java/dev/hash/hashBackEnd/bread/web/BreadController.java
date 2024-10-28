@@ -20,8 +20,8 @@ public class BreadController {
 	private BreadService breadService;
 	
 	@PostMapping("/bread/region/list")
-	public List<Map<String, Object>> selectBreadRegionList(@RequestBody Map<String, Object> receiveJson) throws Exception {
-		List<Map<String, Object>> returnJson = null;
+	public Map<String, Object> selectBreadRegionList(@RequestBody Map<String, Object> receiveJson) throws Exception {
+		Map<String, Object> returnJson = new HashMap<>();
 		Map<String, Object> dataInfo = new HashMap<>();
 		try {
 			dataInfo.putAll(receiveJson);
@@ -34,8 +34,8 @@ public class BreadController {
 	}
 	
 	@PostMapping("/bread/area/list")
-	public List<Map<String, Object>> selectBreadAreaList(@RequestBody Map<String, Object> receiveJson) throws Exception {
-		List<Map<String, Object>> returnJson = null;
+	public Map<String, Object> selectBreadAreaList(@RequestBody Map<String, Object> receiveJson) throws Exception {
+		Map<String, Object> returnJson = new HashMap<>();
 		Map<String, Object> dataInfo = new HashMap<>();
 		try {
 			dataInfo.putAll(receiveJson);
@@ -48,8 +48,8 @@ public class BreadController {
 	}
 
 	@PostMapping("/bread/store/list")
-	public List<Map<String, Object>> selectBreadStoreList(@RequestBody Map<String, Object> receiveJson) throws Exception {
-		List<Map<String, Object>> returnJson = null;
+	public Map<String, Object> selectBreadStoreList(@RequestBody Map<String, Object> receiveJson) throws Exception {
+		Map<String, Object> returnJson = new HashMap<>();
 		Map<String, Object> dataInfo = new HashMap<>();
 		try {
 			dataInfo.putAll(receiveJson);

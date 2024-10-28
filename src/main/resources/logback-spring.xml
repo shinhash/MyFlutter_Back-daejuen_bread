@@ -17,16 +17,16 @@
     </appender>
 
     <!-- Logger -->
-    <logger name="com.study" level="DEBUG" appender-ref="console" />
-    <logger name="jdbc" level="DEBUG" appender-ref="console" />
-    <logger name="jdbc.sqlonly" level="OFF" appender-ref="console" /> 
-    <logger name="jdbc.sqltiming" level="DEBUG" appender-ref="console" /> 
-    <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console" />
-    <logger name="dev.hash.hashBackEnd" level="DEBUG" appender-ref="console" />
-    <logger name="org.springframework" level="DEBUG" appender-ref="console" />
+    <logger name="jdbc" level="DEBUG" appender-ref="console" additive="false" />
+    <logger name="jdbc.sqlonly" level="DEBUG" appender-ref="console" additive="false" /> 
+    <logger name="jdbc.sqltiming" level="DEBUG" appender-ref="console" additive="false" /> 
+    <logger name="jdbc.resultset" level="DEBUG" appender-ref="console" additive="false" />
+    <logger name="jdbc.resultsettable" level="DEBUG" appender-ref="console" additive="false" />
+    <logger name="dev.hash.hashBackEnd" level="DEBUG" appender-ref="console" additive="false" />
+    <logger name="org.springframework" level="DEBUG" appender-ref="console" additive="false" />
 
     <!-- Root Logger -->
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="console" />
     </root>
 </configuration>
