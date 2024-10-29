@@ -3,6 +3,8 @@ package dev.hash.hashBackEnd.bread.web;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,6 +51,23 @@ public class BreadController {
 
 	@PostMapping("/bread/store/list")
 	public Map<String, Object> selectBreadStoreList(@RequestBody Map<String, Object> receiveJson) throws Exception {
+		Map<String, Object> returnJson = new HashMap<>();
+		Map<String, Object> dataInfo = new HashMap<>();
+		try {
+			dataInfo.putAll(receiveJson);
+			log.info("dataInfo put all : " + dataInfo.toString());
+			returnJson = breadService.selectBreadStoreList(dataInfo);
+		}catch (Exception e) { e.printStackTrace(); }
+		
+		log.info("================= spring boot selectBreadStoreList success !!! =================");
+		return returnJson;
+	}
+	
+	
+	
+	
+	@GetMapping("/bread/store/list/temp")
+	public Map<String, Object> selectBreadStoreList_temp(@RequestBody Map<String, Object> receiveJson) throws Exception {
 		Map<String, Object> returnJson = new HashMap<>();
 		Map<String, Object> dataInfo = new HashMap<>();
 		try {
