@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.hash.hashBackEnd.schedule.mapper.ScheduleMapper">
+
+	<select id="selectCategoryList" parameterType="HashMap" resultType="HashMap">
+		/* query id = selectCategoryList */
+		SELECT   CATEGORY_ID
+			   , CATEGORY_CONTENT
+			   , CATEGORY_REG_DT
+			   , CATEGORY_MOD_DT
+			   , CATEGORY_USE_YN
+		  FROM CATEGORY_INFO
+		 WHERE CATEGORY_USE_YN = 'Y'
+		 <if test="categoryId != null and categoryId != ''">
+		   AND CATEGORY_ID = #{categoryId}s
+		 </if>
+		ORDER BY CATEGORY_ID
+	</select>
+
+	<select id="selectScheduleList" parameterType="HashMap" resultType="HashMap">
+		/* query id = selectScheduleList */
+		SELECT   SCHEDULE_ID
+			   , CATEGORY_ID
+			   , SCHEDULE_DATE
+			   , SCHEDULE_STTIME
+			   , SCHEDULE_EDTIME
+			   , SCHEDULE_CONTENT
+			   , SCHEDULE_REG_DT
+			   , SCHEDULE_MOD_DT
+			   , SCHEDULE_USE_YN
+		  FROM SCHEDULE_INFO
+		 WHERE SCHEDULE_USE_YN = 'Y'
+		 <if test="scheduleId != null and scheduleId != ''">
+		   AND SCHEDULE_ID = #{scheduleId}s
+		 </if>
+		ORDER BY SCHEDULE_STTIME
+	</select>
+	
+</mapper>
